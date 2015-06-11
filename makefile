@@ -1,5 +1,5 @@
 CPP=g++
-MKDIR_P = mkdir 
+MKDIR_P=mkdir -p
 
 .PHONY: binary
 
