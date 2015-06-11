@@ -3,7 +3,7 @@ MKDIR_P = mkdir
 
 .PHONY: binary
 
-all: binary bedpeTobed
+all: binary bedpeTobed filterPairToBed
 
 
 binary:
@@ -11,3 +11,7 @@ binary:
 
 bedpeTobed:
 	$(CPP) bedpeTobed.cpp -o ./bin/bedpeTobed
+
+filterPairToBed:
+	$(CPP) filterPairToBed.cpp -o ./bin/filterPairToBed
+

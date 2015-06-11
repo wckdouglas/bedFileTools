@@ -108,6 +108,12 @@ int main(int argc, char **argv)
 	int c;
 	double fraction = 0.5;
 	string filename;
+	
+	if (argc == 1)
+	{
+		usage(program);
+		return 1;
+	}
 
 	while ((c = getopt (argc, argv, "i:f:")) != -1)
 	{

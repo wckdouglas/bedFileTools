@@ -86,8 +86,8 @@ int standardIn()
 // print usage
 int usage(char* program)
 {
-	cout << "usage: " << program << " <bedpeFile> | <stdin>" << endl;
-	cout << endl;
+	cerr << "usage: " << program << " <bedpeFile> | <stdin>" << endl;
+	cerr << endl;
 	return 0;
 }
 
