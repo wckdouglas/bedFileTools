@@ -29,6 +29,7 @@ stringList split(const string &s, char delim)
 // and assign chrom/start/end/strand to each columns
 int processBedpe(string line, double fraction)
 {
+	ios::sync_with_stdio(false);
 	string chrom1, chrom2;
 	int start1, end1, start2, end2;
 	string id, strand1, strand2;
@@ -86,6 +87,7 @@ int readFile(string filename, double fraction)
 // reading from standard input
 int standardIn(double fraction)
 {
+	ios::sync_with_stdio(false);
 	for (string line; getline(cin, line);)
 	{
 		processBedpe(line,fraction);

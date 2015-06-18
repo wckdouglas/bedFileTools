@@ -33,6 +33,7 @@ int printBed(string chrom, int start1, int start2 ,
 {
 	int start = min(start1,start2);
 	int end = max(end1,end2);
+	ios::sync_with_stdio(false);
 	cout << chrom << '\t' << start << '\t' << end << '\t';
 	cout << id << '\t' << end-start << '\t' << strand << '\n';
 	return 0;
@@ -76,6 +77,7 @@ int readFile(string filename)
 // reading from standard input
 int standardIn()
 {
+	ios::sync_with_stdio(false);
 	for (string line; getline(cin, line);)
 	{
 		processBedpe(line);
