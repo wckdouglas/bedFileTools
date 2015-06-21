@@ -33,7 +33,6 @@ int printBed(string chrom, int start1, int start2 ,
 {
 	int start = min(start1,start2);
 	int end = max(end1,end2);
-	ios::sync_with_stdio(false);
 	cout << chrom << '\t' << start << '\t' << end << '\t';
 	cout << id << '\t' << end-start << '\t' << strand << '\n';
 	return 0;
@@ -96,6 +95,7 @@ int usage(char* program)
 // main function for parsing arguments
 int main(int argc, char **argv)
 {
+	ios::sync_with_stdio(false);
 	char *program = argv[0];
 	if (argc != 2)
 	{
