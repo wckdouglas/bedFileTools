@@ -46,6 +46,7 @@ int processBedpe(string line)
 	return 0;
 }
 
+
 // reading from files
 int readFile(string filename)
 {
@@ -60,7 +61,6 @@ int readFile(string filename)
 // reading from standard input
 int standardIn()
 {
-	ios::sync_with_stdio(false);
 	for (string line; getline(cin, line);)
 	{
 		processBedpe(line);

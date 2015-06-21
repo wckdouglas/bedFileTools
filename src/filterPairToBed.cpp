@@ -81,7 +81,8 @@ int standardIn(double fraction)
 // print usage
 int usage(char* program)
 {
-	cerr << "usage: " << program << " -i <pairtobed File> | <stdin> [-f <fraction>]" << endl;
+	cerr << "usage: " << program;
+	cerr << " -i <pairtobed File> | <stdin> [-f <fraction>]" << endl;
 	cerr << endl;
 	return 0;
 }
