@@ -6,24 +6,9 @@
 #include <fstream>
 #include <cstring>
 #include <unistd.h>
+#include "stringManipulation.h"
 
 using namespace std;
-
-typedef vector<string> stringList;
-
-//split function to split line with desired deliminator
-stringList split(const string &s, char delim) 
-{
-	stringList result;
-    stringstream ss(s);
-    string item;
-    while (getline(ss, item, delim)) 
-    {
-        result.push_back(item);
-    }
-    return result;
-}
-
 
 // split every line tab, 
 // and assign chrom/start/end/strand to each columns

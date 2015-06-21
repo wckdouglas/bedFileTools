@@ -6,24 +6,8 @@
 #include <sstream>
 #include <cstring>
 #include <stdio.h>
+#include "stringManipulation.h"
 
-
-using namespace std;
-
-typedef vector<string> stringList;
-
-//split function to split line with desired deliminator
-stringList split(const string &s, char delim) 
-{
-	stringList result;
-	stringstream ss(s);
-	string item;
-	while (getline(ss, item, delim)) 
-	{
-		result.push_back(item);
-	}
-	return result;
-}
 
 // put leftmost start site and 
 // rightmost end site to new bed file
