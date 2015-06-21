@@ -20,7 +20,7 @@ int processBedpe(string line, double fraction)
 	string geneChrom, geneName;
 	int geneStart, geneEnd;
 	int readLength1, readLength2;
-    string geneStrand, geneType, geneID;
+	string geneStrand, geneType, geneID;
 	stringList columns = split(line, '\t');
 	//pairReads
 	chrom1 = columns[0];
