@@ -16,13 +16,13 @@ typedef vector<string> stringList;
 stringList split(const string &s, char delim) 
 {
 	stringList result;
-    stringstream ss(s);
-    string item;
-    while (getline(ss, item, delim)) 
-    {
-        result.push_back(item);
-    }
-    return result;
+	stringstream ss(s);
+	string item;
+	while (getline(ss, item, delim)) 
+	{
+		result.push_back(item);
+	}
+	return result;
 }
 
 // put leftmost start site and 
