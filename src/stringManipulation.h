@@ -22,23 +22,3 @@ stringList split(const string &s, char delim)
 	return result;
 }
 
-// reading from files
-int readFile(string filename)
-{
-	ifstream bedFile(filename);
-	for (string line; getline(bedFile, line);)
-	{
-		processBedpe(line);
-	}
-	return 0;
-}
-
-// reading from standard input
-int standardIn()
-{
-	for (string line; getline(cin, line);)
-	{
-		processBedpe(line);
-	}
-	return 0;
-}

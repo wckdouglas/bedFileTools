@@ -60,7 +60,7 @@ int processBedpe(string line, double fraction)
 // reading from files
 int readFile(string filename, double fraction)
 {
-	ifstream bedFile(filename);
+	ifstream bedFile(filename.c_str());
 	for (string line; getline(bedFile, line);)
 	{
 		processBedpe(line, fraction);

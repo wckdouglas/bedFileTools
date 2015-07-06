@@ -50,7 +50,7 @@ int processBedpe(string line)
 // reading from files
 int readFile(string filename)
 {
-	ifstream bedFile(filename);
+	ifstream bedFile(filename.c_str());
 	for (string line; getline(bedFile, line);)
 	{
 		processBedpe(line);
