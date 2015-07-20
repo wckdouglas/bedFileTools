@@ -1,4 +1,4 @@
-# bedFiles
+# bedFileTools
 
 bedpeTobed:
 This is a prgram to convert bedpe file to bed file
