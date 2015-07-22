@@ -12,7 +12,7 @@ using namespace std;
 
 // split every line tab, 
 // and assign chrom/start/end/strand to each columns
-int processBedpe(string line, double fraction)
+int processBedpe(string line, double fraction, int strandeness)
 {
 	string chrom1, chrom2;
 	int start1, end1, start2, end2;
@@ -47,33 +47,43 @@ int processBedpe(string line, double fraction)
 	readLength2 = end2 - start2;
 
 	if (strand1.compare(strand2) != 0 && chrom1.compare(chrom2) == 0 &&
-		chrom1.compare(geneChrom) == 0 && strand1.compare(geneStrand) == 0 &&
+		chrom1.compare(geneChrom) == 0 && 
 		min(end1,geneEnd) - max(start1,geneStart) > fraction * readLength1 &&
 		min(end2,geneEnd) - max(start2,geneStart) > fraction * readLength2 )
 	{	
-		cout << line << '\n';
+		if ( strandeness == 1)
+		{
+			if (strand1.compare(geneStrand) == 0 )
+			{
+				cout << line << '\n';
+			}
+		}
+		else
+		{
+			cout << line << '\n';
+		}
 	}
 
 	return 0;
 }
 
 // reading from files
-int readFile(string filename, double fraction)
+int readFile(string filename, double fraction, int strandeness)
 {
 	ifstream bedFile(filename.c_str());
 	for (string line; getline(bedFile, line);)
 	{
-		processBedpe(line, fraction);
+		processBedpe(line, fraction, strandeness);
 	}
 	return 0;
 }
 
 // reading from standard input
-int standardIn(double fraction)
+int standardIn(double fraction, int strandeness)
 {
 	for (string line; getline(cin, line);)
 	{
-		processBedpe(line,fraction);
+		processBedpe(line,fraction, strandeness);
 	}
 	return 0;
 }
@@ -82,7 +92,11 @@ int standardIn(double fraction)
 int usage(char* program)
 {
 	cerr << "usage: " << program;
-	cerr << " -i <pairtobed File> | <stdin> [-f <fraction>]" << endl;
+	cerr << " -i <pairtobed File> | <stdin> [-f <fraction>] [-s]" << endl;
+	cerr << "\n" ;
+	cerr << "-f         fraction of overlap [default = 0.001]" << endl;
+	cerr << "-i         can be file name or - for stdin" << endl;
+	cerr << "-s         optional, for stradeness check"<<endl;
 	cerr << endl;
 	return 0;
 }
@@ -93,7 +107,8 @@ int main(int argc, char **argv)
 	ios::sync_with_stdio(false);
 	char *program = argv[0];
 	int c;
-	double fraction = 0.5;
+	double fraction = 0.001;
+    int	strandeness = 0;
 	string filename;
 	
 	if (argc == 1)
@@ -102,7 +117,7 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	while ((c = getopt (argc, argv, "i:f:")) != -1)
+	while ((c = getopt (argc, argv, "i:f:s")) != -1)
 	{
 		switch(c)
 		{
@@ -111,6 +126,9 @@ int main(int argc, char **argv)
 				break;
 			case 'f':
 				fraction = atof(optarg);
+				break;
+			case 's':
+				strandeness = 1;
 				break;
 			case '?':
 				if (optopt == 'f')
@@ -128,11 +146,11 @@ int main(int argc, char **argv)
 	}
 	if (strcmp(filename.c_str(),"-")==0)
 	{
-		standardIn(fraction);
+		standardIn(fraction,strandeness);
 	}
 	else 
 	{
-		readFile(filename,fraction);
+		readFile(filename,fraction,strandeness);
 	}
 
 	return 0;
