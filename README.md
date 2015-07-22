@@ -12,7 +12,7 @@ usage:
 	./bedpeTobed <bedpeFile> | <stdin>
 
 filterPairToBed:
-This program help to resovle the bug in *bedtools pairtobed*, where *-type both* does not output very well.
+This program help to resovle the bug in ***bedtools pairtobed***, where ***-type both*** does not output very well.
 
 * require both reads mapped to the feature
 * tune ***-f option***  for desirable overlaping region
