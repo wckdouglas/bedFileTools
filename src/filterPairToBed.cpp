@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
+#include <cassert>
 #include <cstring>
 #include <unistd.h>
 #include "stringManipulation.h"
@@ -43,7 +44,7 @@ int processBedpe(string line, double fraction, int strandeness)
 	geneID = columns[17];
 	
 	//computer read lengths
-	readLength1 = end2 - start1;
+	readLength1 = end1 - start1;
 	readLength2 = end2 - start2;
 
 	if (strand1.compare(strand2) != 0 && chrom1.compare(chrom2) == 0 &&
@@ -58,7 +59,14 @@ int processBedpe(string line, double fraction, int strandeness)
 				cout << line << '\n';
 			}
 		}
-		else
+		else if (strandeness == 2)
+		{
+			if (strand1.compare(geneStrand) != 0 )
+			{
+				cout << line << '\n';
+			}
+		}
+		else if (strandeness == 0)
 		{
 			cout << line << '\n';
 		}
@@ -117,7 +125,7 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	while ((c = getopt (argc, argv, "i:f:s")) != -1)
+	while ((c = getopt (argc, argv, "i:f:sS")) != -1)
 	{
 		switch(c)
 		{
@@ -129,6 +137,9 @@ int main(int argc, char **argv)
 				break;
 			case 's':
 				strandeness = 1;
+				break;
+			case 'S':
+				strandeness = 2;
 				break;
 			case '?':
 				if (optopt == 'f')
@@ -143,6 +154,7 @@ int main(int argc, char **argv)
 			default:
 				abort();
 		}
+	assert(strandeness < 3);
 	}
 	if (strcmp(filename.c_str(),"-")==0)
 	{
