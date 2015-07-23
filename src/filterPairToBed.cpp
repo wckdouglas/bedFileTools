@@ -104,7 +104,8 @@ int usage(char* program)
 	cerr << "\n" ;
 	cerr << "-f         fraction of overlap [default = 0.001]" << endl;
 	cerr << "-i         can be file name or - for stdin" << endl;
-	cerr << "-s         optional, for stradeness check"<<endl;
+	cerr << "-s         optional, for same strand"<<endl;
+	cerr << "-S         optional, for opposite strand"<<endl;
 	cerr << endl;
 	return 0;
 }
