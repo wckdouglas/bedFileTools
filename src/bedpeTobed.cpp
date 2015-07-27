@@ -18,10 +18,11 @@ int printBed(string chrom, int start1, int start2 ,
 {
 	int start = min(start1,start2);
 	int end = max(end1,end2);
-	if (end - start < maximumDist)
+	int innerDist = end - start;
+	if (innerDist < maximumDist)
 	{
 		cout << chrom << '\t' << start << '\t' << end << '\t';
-		cout << id << '\t' << end-start << '\t' << strand << '\n';
+		cout << id << '\t' << innerDist << '\t' << strand << '\n';
 	}
 	return 0;
 }
