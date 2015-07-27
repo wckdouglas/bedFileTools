@@ -135,6 +135,7 @@ int main(int argc, char **argv)
 	}
 	else if (strcmp(Filename.c_str(),"-")==0)
 	{
+		cerr << "Using stdin" << endl;
 		standardIn(maximumDist);
 	}
 	else
