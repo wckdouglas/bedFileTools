@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <unordered_set>
+#include <cstring>
 #include "stringManipulation.hpp"
 
 using namespace std;
