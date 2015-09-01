@@ -7,7 +7,7 @@
 #include <cstring>
 #include <stdio.h>
 #include <unistd.h>
-#include "stringManipulation.h"
+#include "stringManipulation.hpp"
 
 
 // put leftmost start site and 

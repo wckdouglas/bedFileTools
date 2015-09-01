@@ -7,7 +7,7 @@
 #include <cassert>
 #include <cstring>
 #include <unistd.h>
-#include "stringManipulation.h"
+#include "stringManipulation.hpp"
 
 using namespace std;
 
