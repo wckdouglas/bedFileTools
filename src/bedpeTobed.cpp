@@ -14,12 +14,12 @@
 // rightmost end site to new bed file
 // output read length as 5th columns
 int printBed(string chrom, int start1, int start2 ,
-		int end1, int end2, string strand, string id, int maximumDist)
+		int end1, int end2, string strand, string id, int maximumDist, int minDist)
 {
 	int start = min(start1,start2);
 	int end = max(end1,end2);
 	int innerDist = end - start;
-	if (innerDist < maximumDist)
+	if (innerDist < maximumDist && innerDist > minDist)
 	{
 		cout << chrom << '\t' << start << '\t' << end << '\t';
 		cout << id << '\t' << innerDist << '\t' << strand << '\n';
@@ -29,7 +29,7 @@ int printBed(string chrom, int start1, int start2 ,
 
 // split every line tab, 
 // and assign chrom/start/end/strand to each columns
-int processBedpe(string line, int maximumDist)
+int processBedpe(string line, int maximumDist, int minDist)
 {
 	string chrom1, chrom2;
 	int start1, end1, start2, end2;
@@ -51,20 +51,20 @@ int processBedpe(string line, int maximumDist)
 	strand2 = columns[9];
 	if (strand1.compare(strand2) != 0 && chrom1.compare(chrom2) == 0)
 	{	
-		printBed(chrom1,start1,start2,end1,end2,strand1, id , maximumDist);
+		printBed(chrom1,start1,start2,end1,end2,strand1, id , maximumDist, minDist);
 	}
 	return 0;
 }
 
 
 // reading from files
-int readFile(string filename, int maximumDist)
+int readFile(string filename, int maximumDist, int minDist)
 {
 	ifstream bedFile(filename.c_str());
 	int fail;
 	for (string line; getline(bedFile, line);)
 	{
-		fail = processBedpe(line, maximumDist);
+		fail = processBedpe(line, maximumDist, minDist);
 		if (fail == 1)
 		{
 			return 1;
@@ -74,12 +74,12 @@ int readFile(string filename, int maximumDist)
 }
 
 // reading from standard input
-int standardIn(int maximumDist)
+int standardIn(int maximumDist, int minDist)
 {
 	int fail;
 	for (string line; getline(cin, line);)
 	{
-		processBedpe(line, maximumDist);
+		processBedpe(line, maximumDist, minDist);
 		if (fail == 1)
 		{
 			return 1;
@@ -94,6 +94,7 @@ int usage(char* program)
 	cerr << "usage: " << program << " -i <bedpeFile> | <stdin>" << endl;
 	cerr << "-i          bedpe file or standard input[-]" << endl;
 	cerr << "-m          maximum inner span distance of the pair [default: 10000]"<<endl;
+	cerr << "-l          minimum inner span distance of the pair [default: 10]"<<endl;
 	cerr << endl;
 	return 0;
 }
@@ -104,6 +105,7 @@ int main(int argc, char **argv)
 	ios::sync_with_stdio(false);
 	char *program = argv[0];
 	int maximumDist = 10000;
+	int minDist = 10;
 	int c;
 	string Filename = " ";
 	
@@ -116,6 +118,9 @@ int main(int argc, char **argv)
 				break;
 			case 'm':
 				maximumDist = atoi(optarg);
+				break;
+			case 'l':
+				minDist = atoi(optarg);
 				break;
 			case '?':
 				if (optopt == 'i')
@@ -136,11 +141,11 @@ int main(int argc, char **argv)
 	else if (strcmp(Filename.c_str(),"-")==0)
 	{
 		cerr << "Using stdin" << endl;
-		standardIn(maximumDist);
+		standardIn(maximumDist, minDist);
 	}
 	else
 	{
-		readFile(Filename, maximumDist);
+		readFile(Filename, maximumDist, minDist);
 	}
 	return 0;
 }
