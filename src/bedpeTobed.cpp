@@ -109,7 +109,7 @@ int main(int argc, char **argv)
 	int c;
 	string Filename = " ";
 	
-	while ((c = getopt (argc, argv, "i:m:")) != -1)
+	while ((c = getopt (argc, argv, "i:m:l:")) != -1)
 	{
 		switch(c)
 		{
@@ -133,6 +133,7 @@ int main(int argc, char **argv)
 		}
 	}
 	cerr << "Maximum inner distance filterd at: " << maximumDist << endl;
+	cerr << "Minimum inner distance filterd at: " << minDist << endl;
 	if (strcmp(Filename.c_str()," ")==0)
 	{
 		cerr << "option i requires a file!" << endl;
